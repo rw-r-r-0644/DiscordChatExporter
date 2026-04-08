@@ -72,6 +72,12 @@ internal class JsonMessageWriter(Stream stream, ExportContext context)
             )
         );
 
+        if (Context.Request.ShouldOutputRawJson)
+        {
+            _writer.WritePropertyName("raw");
+            _writer.WriteRawValue(user.RawJson);
+        }
+
         _writer.WriteEndObject();
         await _writer.FlushAsync(cancellationToken);
     }
@@ -621,6 +627,12 @@ internal class JsonMessageWriter(Stream stream, ExportContext context)
         }
 
         _writer.WriteEndArray();
+
+        if (Context.Request.ShouldOutputRawJson)
+        {
+            _writer.WritePropertyName("raw");
+            _writer.WriteRawValue(message.RawJson);
+        }
 
         _writer.WriteEndObject();
         await _writer.FlushAsync(cancellationToken);

@@ -108,6 +108,12 @@ public abstract class ExportCommandBase : DiscordCommandBase
     public bool ShouldReuseAssets { get; set; } = false;
 
     [CommandOption(
+        "raw",
+        Description = "Include raw Discord JSON objects in the export."
+    )]
+    public bool ShouldOutputRawJson { get; set; } = false;
+
+    [CommandOption(
         "media-dir",
         Description = "Download assets to this directory. "
             + "If not specified, the asset directory path will be derived from the output path."
@@ -276,6 +282,7 @@ public abstract class ExportCommandBase : DiscordCommandBase
                                         ShouldFormatMarkdown,
                                         ShouldDownloadAssets,
                                         ShouldReuseAssets,
+                                        ShouldOutputRawJson,
                                         Locale,
                                         IsUtcNormalizationEnabled
                                     );

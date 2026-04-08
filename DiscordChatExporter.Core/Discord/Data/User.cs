@@ -15,7 +15,8 @@ public partial record User(
     int? Discriminator,
     string Name,
     string DisplayName,
-    string AvatarUrl
+    string AvatarUrl,
+    string RawJson
 ) : IHasId
 {
     public string DiscriminatorFormatted { get; } =
@@ -51,6 +52,6 @@ public partial record User
                 ?.Pipe(h => ImageCdn.GetUserAvatarUrl(id, h))
             ?? ImageCdn.GetFallbackUserAvatarUrl(avatarIndex);
 
-        return new User(id, isBot, discriminator, name, displayName, avatarUrl);
+        return new User(id, isBot, discriminator, name, displayName, avatarUrl, json.GetRawText());
     }
 }

@@ -28,7 +28,8 @@ public partial record Message(
     MessageReference? Reference,
     Message? ReferencedMessage,
     MessageSnapshot? ForwardedMessage,
-    Interaction? Interaction
+    Interaction? Interaction,
+    string RawJson
 ) : IHasId
 {
     public bool IsEmpty { get; } =
@@ -205,7 +206,8 @@ public partial record Message
             messageReference,
             referencedMessage,
             forwardedMessage,
-            interaction
+            interaction,
+            json.GetRawText()
         );
     }
 }
